@@ -1,0 +1,9 @@
+<h1>Dashboard</h1>
+{{#each userPosts as |post|}}
+    <div class="post">
+        <h2>{{post.title}}</h2>
+        <p>{{post.content}}</p>
+        <!-- Add buttons for editing and deleting posts -->
+    </div>
+{{/each}}
+<!-- Add form for creating a new post -->

@@ -4,9 +4,9 @@ const exphbs = require('express-handlebars');
 // const { Post } = require('./models'); // Adjust this path as necessary
 
 // Import routes
-const userRoutes = require('./routes/users');
-const postRoutes = require('./routes/posts');
-const commentRoutes = require('./routes/comments');
+const userRoutes = require('./controllers/api/users');
+const postRoutes = require('./controllers/apiposts');
+const commentRoutes = require('./controllers/apicomments');
 
 const app = express();
 const PORT = process.env.PORT || 3000;

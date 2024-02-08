@@ -1,6 +1,6 @@
 const express = require('express');
-const { Post } = require('../models'); // Adjust the path as necessary
-const isAuthenticated = require('../middleware/isAuthenticated'); // Path to your authentication middleware
+const { Post } = require('../../models'); // Adjust the path as necessary
+const isAuthenticated = require('../../middleware/isAuthenticated'); // Path to your authentication middleware
 const router = express.Router();
 
 // Create a new post

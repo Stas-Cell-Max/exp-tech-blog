@@ -1,6 +1,6 @@
 const express = require('express');
-const { Comment } = require('../models'); // Adjust the path as necessary
-const isAuthenticated = require('../middleware/isAuthenticated'); // Path to your authentication middleware
+const { Comment } = require('../../models'); // Adjust the path as necessary
+const isAuthenticated = require('../../middleware/isAuthenticated'); // Path to your authentication middleware
 const router = express.Router();
 
 // Add a new comment to a post

@@ -5,8 +5,9 @@ const exphbs = require('express-handlebars');
 
 // Import routes
 const userRoutes = require('./controllers/api/users');
-const postRoutes = require('./controllers/apiposts');
-const commentRoutes = require('./controllers/apicomments');
+const postRoutes = require('./controllers/api/posts');
+const commentRoutes = require('./controllers/api/comments');
+const apiRoutes = require('./controllers/api');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,9 +28,9 @@ app.engine('handlebars', hbs.engine );
 app.set('view engine', 'handlebars');
 
 // Use routes
-app.use('/users', userRoutes);
-app.use('/posts', postRoutes);
-app.use('/comments', commentRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
+app.use('/api/comments', commentRoutes);
 
 //Homepage route
 // app.get('/', async (req, res) => {

@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars');
 // const { Post } = require('./models'); // Adjust this path as necessary
 
 // Import aggregated API routes
-const apiRoutes = require('./controllers/api');
+const apiRoutes = require('./controllers/');
 
 const app = express();
 const PORT = process.env.PORT || 3000;

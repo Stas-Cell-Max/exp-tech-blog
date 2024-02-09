@@ -1,0 +1,53 @@
+/* Custom styles for the tech blog */
+
+/* General styles */
+body {
+    background-color: #f8f9fa; /* A light grey background */
+  }
+  
+  /* Navbar styles */
+  .navbar {
+    background-color: #343a40; /* Bootstrap dark background */
+  }
+  
+  /* Active navbar link styles */
+  .navbar .nav-link.active {
+    background-color: #ffc107; /* Bootstrap yellow for active state */
+  }
+  
+  /* Blog post styles */
+  .post {
+    background-color: #fff; /* White background for posts */
+    border: 1px solid #ddd; /* Slight border for definition */
+    border-radius: 0.25rem; /* Rounded corners */
+    margin-bottom: 1rem; /* Space between posts */
+    padding: 1rem; /* Padding inside posts */
+  }
+  
+  /* Blog post title styles */
+  .post-title {
+    color: #212529; /* Bootstrap dark text for titles */
+    margin-bottom: 0.5rem; /* Space below the title */
+  }
+  
+  /* Blog post metadata styles */
+  .post-meta {
+    font-size: 0.875rem; /* Smaller font size for metadata */
+    color: #6c757d; /* Bootstrap secondary text color */
+  }
+  
+  /* Dashboard specific styles */
+  .dashboard {
+    background-color: #fff; /* White background for the dashboard area */
+    padding: 2rem; /* More padding inside dashboard */
+  }
+  
+  /* Dashboard title styles */
+  .dashboard-title {
+    font-size: 2rem; /* Larger font size for dashboard title */
+    color: #212529; /* Same as post titles */
+    margin-bottom: 1rem; /* Space below the title */
+  }
+  
+  /* Other dashboard styles as needed */
+  

@@ -1,12 +1,15 @@
 {{#each posts as |post|}}
-  <div class="card mb-3">
+  <article class="card mb-3">
     <div class="card-body">
       <h5 class="card-title">{{post.title}}</h5>
-      <p class="card-text">{{post.excerpt}}</p>
+      <p class="card-text">{{truncate post.excerpt 200}}</p>
       <a href="/posts/{{post.id}}" class="btn btn-primary">Read More</a>
       <p class="card-text">
-        <small class="text-muted">Posted by {{post.author}} on {{post.date}}</small>
+        <small class="text-muted">
+          Posted by {{post.author}} on {{formatDate post.date}}
+          - {{readTime post.content}} min read
+        </small>
       </p>
     </div>
-  </div>
+  </article>
 {{/each}}

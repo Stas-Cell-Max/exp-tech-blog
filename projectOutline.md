@@ -28,10 +28,10 @@ express-session and connect-session-sequelize for handling sessions.
 
 4. Frontend Development
 
-- Design Pages: Plan the layout for your homepage, dashboard, login/sign-up pages, etc.
-- Implement Handlebars: Utilize Handlebars.js to render your frontend views.
+- Design Pages: Plan the layout for the homepage, dashboard, login/sign-up pages, etc.
+- Implement Handlebars: Utilize Handlebars.js to render the frontend views.
 - Frontend Logic: Write JavaScript to manage frontend functionality like submitting posts, comments, etc.
-- Styling: Use CSS to style your pages according to the design.
+- Styling: Use CSS to style the pages according to the design.
 
 5. Testing
 

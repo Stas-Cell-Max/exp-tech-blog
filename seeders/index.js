@@ -1,22 +1,23 @@
-const seedUsers = require('./YYYYMMDD-users');
-const seedPosts = require('./YYYYMMDD-posts');
-const seedComments = require('./YYYYMMDD-comments');
 const sequelize = require('../config/connection');
+const seedUsers = require('./users');
+const seedPosts = require('./posts'); // Assume you have this seeder
+const seedComments = require('./comments'); // Assume you have this seeder
 
 const seedAll = async () => {
-    await sequelize.sync({ force: true }); // This will drop and recreate tables
-    console.log('\n----- DATABASE SYNCED -----\n');
-
+  try {
+    await sequelize.sync({ force: true });
     await seedUsers();
-    console.log('\n----- USERS SEEDED -----\n');
-
+    console.log('Users seeded');
     await seedPosts();
-    console.log('\n----- POSTS SEEDED -----\n');
-
+    console.log('Posts seeded');
     await seedComments();
-    console.log('\n----- COMMENTS SEEDED -----\n');
-
-    process.exit(0);
+    console.log('Comments seeded');
+  } catch (error) {
+    console.error('Seeding error:', error);
+  } finally {
+    await sequelize.close();
+    console.log('Database connection closed.');
+  }
 };
 
 seedAll();

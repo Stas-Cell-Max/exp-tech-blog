@@ -2,13 +2,14 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const sequelize = require('./config/connection'); // Import Sequelize connection
 const { Post } = require('./models'); 
 
 // Import aggregated API routes
 const apiRoutes = require('./controllers/');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Middleware setup
 app.use(express.json());
@@ -28,6 +29,19 @@ app.set('view engine', 'handlebars');
 
 // Use the aggregated API routes under '/api'
 app.use('/api', apiRoutes);
+
+// Sequelize model synchronization
+sequelize.sync({ force: false }).then(() => {
+  console.log('Database synced');
+
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}).catch(error => {
+  console.error('Unable to sync database:', error);
+});
+
+
 
 /// Homepage route
 app.get('/', async (req, res) => {

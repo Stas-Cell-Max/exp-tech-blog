@@ -4,12 +4,11 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const sequelize = require('./config/connection'); // Import Sequelize connection
 const { Post } = require('./models'); 
-
-// Import aggregated API routes
 const apiRoutes = require('./controllers/');
+const customHelpers = require('./helpers/handlebars-helpers'); 
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3001;
 
 
 // Middleware setup
@@ -23,8 +22,20 @@ app.use(session({
   saveUninitialized: true,
 }));
 
+
+
+
 // Handlebars setup
-const hbs = exphbs.create({ /* config if needed */ });
+const hbs = exphbs.create({ 
+  extname: '.handlebars',
+  defaultLayout: 'main',
+  layoutsDir: 'views/layouts',
+  partialsDir: ['views/partials/'],
+  helpers: customHelpers,
+ 
+});
+
+app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
@@ -34,21 +45,15 @@ app.use('/api', apiRoutes);
 // Sequelize model synchronization
 sequelize.sync({ force: false }).then(() => {
   console.log('Database synced');
-
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
 }).catch(error => {
   console.error('Unable to sync database:', error);
 });
-
-
 
 /// Homepage route
 app.get('/', async (req, res) => {
   try {
     const posts = await Post.findAll(); // Fetch all posts
-    res.render('home', { // Make sure 'home' corresponds to your handlebars file
+    res.render('pages/home', { 
       posts,
       loggedIn: req.session.userId != null // Pass the loggedIn status to the template
     });

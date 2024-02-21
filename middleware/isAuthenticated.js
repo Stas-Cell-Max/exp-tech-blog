@@ -4,6 +4,7 @@
 // If the user is logged in, it calls next() to pass control to the next handler.
 
 function isAuthenticated(req, res, next) {
+<<<<<<< HEAD
   if (req.session && req.session.userId) {
       // The user is logged in, proceed to the next handler
       next();
@@ -14,3 +15,15 @@ function isAuthenticated(req, res, next) {
 }
 
 module.exports = isAuthenticated;
+=======
+    if (req.session && req.session.userId) {
+        // The user is logged in, proceed to the next handler
+        next();
+    } else {
+        // The user is not logged in, send an unauthorized status
+        res.status(401).json({ message: "Unauthorized: Please log in." });
+    }
+  }
+  
+  module.exports = isAuthenticated;
+>>>>>>> 3ead2c9b13cf63d6d535c666c271e6e208f97202

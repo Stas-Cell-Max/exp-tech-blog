@@ -29,8 +29,8 @@ app.use(session({
 const hbs = exphbs.create({ 
   extname: '.handlebars',
   defaultLayout: 'main',
-  layoutsDir: 'views/layouts',
-  partialsDir: ['views/partials/'],
+  layoutsDir: path.join(__dirname, 'views/layouts'),
+  partialsDir: path.join(__dirname, 'views/partials'),
   helpers: customHelpers,
  
 });

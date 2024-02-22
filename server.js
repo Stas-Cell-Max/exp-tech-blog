@@ -6,6 +6,7 @@ const sequelize = require('./config/connection'); // Import Sequelize connection
 const { Post } = require('./models'); 
 const apiRoutes = require('./controllers/');
 const customHelpers = require('./helpers/handlebars-helpers'); 
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -16,13 +17,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public')); // Serve static files from the 'public' directory
 
+// Session middleware
 app.use(session({
-  secret: 'super secret', // You should move this to an environment variable
-  resave: false,
-  saveUninitialized: true,
+  secret: 'Super secret secret', // This should be a random, unique string used to sign the session ID cookie
+  cookie: {}, // You can set cookie options here
+  resave: false, // Forces the session to be saved back to the session store, even if the session was never modified during the request
+  saveUninitialized: true, // Forces a session that is "uninitialized" to be saved to the store
+  store: new SequelizeStore({
+    db: sequelize
+  })
 }));
-
-
 
 
 // Handlebars setup

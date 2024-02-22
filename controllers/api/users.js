@@ -1,59 +1,87 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const { body, validationResult } = require('express-validator');
 const { User } = require('../../models');
 const router = express.Router();
 
 // Registration Route
-router.post('/register', async (req, res) => {
+router.post('/register', [
+  body('username').trim().notEmpty().withMessage('Username is required'),
+  body('email').isEmail().withMessage('Must be a valid email address'),
+  body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters long'),
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
-    // Hash the password with a salt round of 10
+    const existingUser = await User.findOne({ where: { email: req.body.email } });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already in use" });
+    }
+
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    // Create a new user with the hashed password
     const newUser = await User.create({
       username: req.body.username,
-     
       email: req.body.email,
       password: hashedPassword,
     });
-    // Respond with the newly created user (excluding the password)
-    res.status(201).json({ id: newUser.id, username: newUser.username, email: newUser.email });
+
+    // Log the user in directly after registration
+    req.session.userId = newUser.id;
+    req.session.loggedIn = true; // Mark the user as logged in
+
+    // Redirect to the dashboard after successful registration
+    res.redirect('/dashboard');
   } catch (error) {
+    console.error('Registration error:', error);
     res.status(500).json({ message: "Error registering new user", error: error.message });
   }
 });
 
 // Login Route
-router.post('/login', async (req, res) => {
+router.post('/login', [
+  body('username').trim().notEmpty().withMessage('Username is required'),
+  body('password').notEmpty().withMessage('Password is required'),
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
-    // Find the user by username
     const user = await User.findOne({ where: { username: req.body.username } });
     if (user && await bcrypt.compare(req.body.password, user.password)) {
-      
-      req.session.userId = user.id; // Log the user in by setting the session userId
-      res.json({ message: "Logged in successfully" });
+      req.session.userId = user.id;
+      req.session.loggedIn = true; // Mark the user as logged in
+
+      // Redirect to the dashboard after successful login
+      res.redirect('/dashboard');
     } else {
       res.status(401).json({ message: "Incorrect username or password" });
     }
   } catch (error) {
+    console.error('Login error:', error);
     res.status(500).json({ message: "Error logging in", error: error.message });
   }
 });
 
+// Logout Route
 router.get('/logout', (req, res) => {
-    if (req.session) {
-      // Destroy the session
-      req.session.destroy((err) => {
-        if (err) {
-          res.status(500).send('Could not log out, please try again');
-        } else {
-          res.send('You are now logged out');
-        }
-      });
-    } else {
-      // If there's no session, inform the user they're not logged in
-      res.send('You are not logged in');
-    }
-  });
-  
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        console.error('Logout error:', err);
+        res.status(500).send('Could not log out, please try again');
+      } else {
+        // Optionally, redirect to the homepage or login page after logout
+        res.redirect('/users/login');
+      }
+    });
+  } else {
+    res.status(200).send('You are not logged in');
+  }
+});
 
 module.exports = router;

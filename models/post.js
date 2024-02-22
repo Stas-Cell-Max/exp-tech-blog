@@ -11,14 +11,18 @@ Post.init({
     type: DataTypes.TEXT,
     allowNull: false
   },
-  author: {
-    type: DataTypes.STRING,
-    allowNull: false
+  userId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'user',
+      key: 'id',
+    },
+    allowNull: false,
   },
 },
 {
   sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'post', 

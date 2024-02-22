@@ -41,6 +41,7 @@ app.set('view engine', 'handlebars');
 
 // Use the aggregated API routes under '/api'
 app.use('/api', apiRoutes);
+app.use(express.static('public'));
 
 // Sequelize model synchronization
 sequelize.sync({ force: false }).then(() => {

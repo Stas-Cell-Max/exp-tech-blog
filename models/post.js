@@ -10,7 +10,11 @@ Post.init({
   content: {
     type: DataTypes.TEXT,
     allowNull: false
-  }
+  },
+  author: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
 },
 {
   sequelize,

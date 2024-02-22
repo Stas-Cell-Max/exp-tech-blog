@@ -1,15 +1,14 @@
-{{#each posts as |post|}}
-  <article class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">{{post.title}}</h5>
-      <p class="card-text">{{truncate post.excerpt 200}}</p>
-      <a href="/posts/{{post.id}}" class="btn btn-primary">Read More</a>
-      <p class="card-text">
-        <small class="text-muted">
-          Posted by {{post.author}} on {{formatDate post.date}}
-          - {{readTime post.content}} min read
-        </small>
-      </p>
+{{!-- Wrap posts in a container for layout purposes --}}
+<div class="container">
+  {{#each posts as |post|}}
+    <div class="post">
+      <h2 class="post-title">{{post.title}}</h2>
+      <div class="post-content">{{truncate post.excerpt 200}}</div>
+      <div class="post-meta">
+        Posted by {{post.author}} on {{formatDate post.date}}
+        - {{readTime post.content}} min read
+      </div>
+      <a href="/posts/{{post.id}}" class="btn-read-more">Read More</a>
     </div>
-  </article>
-{{/each}}
+  {{/each}}
+</div>

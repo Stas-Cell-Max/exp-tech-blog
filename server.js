@@ -11,6 +11,16 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Handlebars setup
+const hbs = exphbs.create({ 
+  extname: '.handlebars',
+  defaultLayout: 'main',
+  layoutsDir: path.join(__dirname, 'views/layouts'),
+  partialsDir: path.join(__dirname, 'views/partials'),
+  helpers: customHelpers,
+ 
+});
+
 
 // Middleware setup
 app.use(express.json());
@@ -29,15 +39,7 @@ app.use(session({
 }));
 
 
-// Handlebars setup
-const hbs = exphbs.create({ 
-  extname: '.handlebars',
-  defaultLayout: 'main',
-  layoutsDir: path.join(__dirname, 'views/layouts'),
-  partialsDir: path.join(__dirname, 'views/partials'),
-  helpers: customHelpers,
- 
-});
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', hbs.engine);

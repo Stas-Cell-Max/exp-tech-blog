@@ -1,10 +1,5 @@
 # tech-blog
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 3ead2c9b13cf63d6d535c666c271e6e208f97202
 ## Description 
 
 This CMS-style blog site is a full-stack application that allows developers to publish their blog posts and comment on other developers’ posts as well. Inspired by the functionality of WordPress, it follows the MVC paradigm, leveraging Handlebars.js for templating, Sequelize as the ORM, and express-session for authentication. Deployed on Heroku, it's designed to offer an intuitive and interactive platform for sharing and discussing technology-related content.
@@ -77,8 +72,5 @@ Developing the Employee Tracker application was made possible with the help of v
 - https://expressjs.com/en/guide/routing.html#express-router
 
 ## License
-<<<<<<< HEAD
 This project is licensed under the [MIT License](LICENSE).
-=======
-This project is licensed under the [MIT License](LICENSE).
->>>>>>> 3ead2c9b13cf63d6d535c666c271e6e208f97202
+

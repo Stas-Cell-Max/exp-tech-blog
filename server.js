@@ -3,11 +3,12 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const sequelize = require('./config/connection'); // Import Sequelize connection
-const { Post } = require('./models'); 
 const apiRoutes = require('./controllers/');
 const customHelpers = require('./helpers/handlebars-helpers'); 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+const homeRoutes = require('./controllers/homeRoutes'); // Adjust the path as needed
+app.use('/', homeRoutes);
 const app = express();
 const PORT = process.env.PORT || 3002;
 
@@ -30,7 +31,11 @@ app.use(express.static('public')); // Serve static files from the 'public' direc
 // Session middleware
 app.use(session({
   secret: 'Super secret secret', // This should be a random, unique string used to sign the session ID cookie
-  cookie: {}, // You can set cookie options here
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // Enable secure cookies in production environment
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  },
   resave: false, // Forces the session to be saved back to the session store, even if the session was never modified during the request
   saveUninitialized: true, // Forces a session that is "uninitialized" to be saved to the store
   store: new SequelizeStore({
@@ -45,9 +50,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-// Use the aggregated API routes under '/api'
 app.use('/api', apiRoutes);
-app.use(express.static('public'));
+
 
 // Sequelize model synchronization
 sequelize.sync({ force: false }).then(() => {

@@ -9,7 +9,7 @@ const customHelpers = require('./helpers/handlebars-helpers');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 // Handlebars setup
 const hbs = exphbs.create({ 

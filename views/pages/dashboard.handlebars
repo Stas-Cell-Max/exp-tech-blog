@@ -1,9 +1,13 @@
-<h1>Dashboard</h1>
-{{#each userPosts as |post|}}
-    <div class="post">
-        <h2>{{post.title}}</h2>
-        <p>{{post.content}}</p>
-        <!-- Add buttons for editing and deleting posts -->
-    </div>
-{{/each}}
-<!-- Add form for creating a new post -->
+<h2>Dashboard</h2>
+{{#if posts}}
+    {{#each posts}}
+        <div class="post">
+            <h3>{{this.title}}</h3>
+            <p>{{this.content}}</p>
+            <!-- Add Edit and Delete buttons here -->
+        </div>
+    {{/each}}
+{{else}}
+    <p>You have no posts yet.</p>
+{{/if}}
+<a href="/posts/new">Create New Post</a>

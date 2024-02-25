@@ -1,6 +1,7 @@
 const express = require('express');
 const { Post } = require('../../models'); // Adjust the path as necessary
 const isAuthenticated = require('../../middleware/isAuthenticated'); // Path to your authentication middleware
+
 const router = express.Router();
 
 // Create a new post
@@ -45,9 +46,11 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', isAuthenticated, async (req, res) => {
   try {
     const updated = await Post.update(req.body, {
-      where: { id: req.params.id, userId: req.session.userId }
+      where: { 
+        id: req.params.id, 
+        userId: req.session.userId }
     });
-    if (updated[0] > 0) {
+    if (updatedPost) {
       res.send('Post updated successfully');
     } else {
       res.status(404).send('Post not found or user not authorized');

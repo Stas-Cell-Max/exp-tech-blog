@@ -1,10 +1,10 @@
 const express = require('express');
-const { Comment } = require('../../models'); // Adjust the path as necessary
+const { Comment, User } = require('../../models'); // Adjust the path as necessary
 const isAuthenticated = require('../../middleware/isAuthenticated'); // Path to your authentication middleware
 const router = express.Router();
 
 // Add a new comment to a post
-router.post('/:postId', isAuthenticated, async (req, res) => {
+router.post('/', isAuthenticated, async (req, res) => {
   try {
     const newComment = await Comment.create({
       text: req.body.text,
@@ -28,7 +28,7 @@ router.delete('/:id', isAuthenticated, async (req, res) => {
       }
     });
     if (result > 0) {
-      res.send('Comment deleted successfully');
+      res.send('Comment deleted');
     } else {
       res.status(404).send('Comment not found or user not authorized');
     }

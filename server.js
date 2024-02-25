@@ -4,11 +4,12 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const sequelize = require('./config/connection'); // Import Sequelize connection
 const apiRoutes = require('./controllers/');
+const homeRoutes = require('./controllers/homeRoutes'); // Adjust the path as needed
 const customHelpers = require('./helpers/handlebars-helpers'); 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const homeRoutes = require('./controllers/homeRoutes'); // Adjust the path as needed
-app.use('/', homeRoutes);
+
+
 const app = express();
 const PORT = process.env.PORT || 3002;
 
@@ -44,34 +45,18 @@ app.use(session({
 }));
 
 
-
-
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use('/api', apiRoutes);
-
+app.use('/', homeRoutes);
 
 // Sequelize model synchronization
 sequelize.sync({ force: false }).then(() => {
   console.log('Database synced');
 }).catch(error => {
   console.error('Unable to sync database:', error);
-});
-
-/// Homepage route
-app.get('/', async (req, res) => {
-  try {
-    const posts = await Post.findAll(); // Fetch all posts
-    res.render('pages/home', { 
-      posts,
-      loggedIn: req.session.userId != null // Pass the loggedIn status to the template
-    });
-  } catch (error) {
-    console.error('Error loading homepage:', error);
-    res.status(500).send('Error loading the homepage');
-  }
 });
 
 // Start the server

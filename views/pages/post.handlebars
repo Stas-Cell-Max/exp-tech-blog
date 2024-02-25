@@ -2,48 +2,36 @@
   <div class="row">
     <!-- Blog Content Column -->
     <div class="col-lg-8">
-      <article class="card mb-4 blog-post-card">
-        <div class="card-body">
-          <h2 class="card-title">{{title}}</h2>
-          <div class="blog-post-meta">
-            <small class="text-muted">Posted on {{formatDate date}} by {{user.name}}</small>
-          </div>
-          <div class="blog-post-content">
-            <p>{{content}}</p>
-          </div>
-        </div>
-      </article>
-    </div>
-    <!-- Comments Column -->
-    <div class="col-lg-4">
-      <div class="card comments-card">
-        <div class="card-header">
-          <h5 class="card-title">Comments</h5>
-        </div>
-        <div class="card-body">
-          {{#if comments.length}}
-            <div class="comments-container">
-              {{#each comments}}
-                <div class="card mb-2">
-                  <div class="card-body">
-                    <p class="comment-text">{{this.comment}}</p>
-                    <div class="comment-footer">
-                      <small class="text-muted">Commented by {{this.user.name}} on {{formatDate this.date}}</small>
-                    </div>
-                  </div>
-                </div>
-              {{/each}}
-            </div>
-          {{else}}
-            <p>No comments yet. Be the first to comment!</p>
-          {{/if}}
-          <a href="/posts/{{id}}/comment" class="btn btn-primary mt-2">Leave a Comment</a>
-        </div>
-      </div>
+      <h2 class="card-title">{{post.title}}</h2>
+      <p>Posted on {{formatDate post.createdAt}} by {{post.User.name}}</p>
+      <p>{{post.content}}</p>
     </div>
   </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  {{!-- Only include comments if you have that functionality implemented --}}
+  {{#if post.Comments}}
+    <div class="row mt-4">
+      <div class="col-lg-8">
+        <h3>Comments</h3>
+        {{#each post.Comments}}
+          <div class="comment">
+            <p>{{this.text}}</p>
+            <p>Commented by {{this.User.name}} on {{formatDate this.createdAt}}</p>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
+
+  {{!-- Include the comment form if you have user authentication implemented --}}
+  {{#if loggedIn}}
+    <div class="row mt-4">
+      <div class="col-lg-8">
+        <form action="/posts/{{post.id}}/comments" method="POST">
+          <textarea name="comment" required placeholder="Leave a comment..."></textarea>
+          <button type="submit" class="btn btn-primary mt-2">Submit Comment</button>
+        </form>
+      </div>
+    </div>
+  {{/if}}
+</div>

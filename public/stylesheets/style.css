@@ -1,18 +1,22 @@
 /* Custom styles for the tech blog */
 
 body {
-  background-color: #f8f9fa;
+  background-color: #9db6bd;
   font-family: Arial, sans-serif;
 }
 
 /* Navigation styles */
 .navbar {
-  background-color: #343a40;
+  background-color: #2c435a;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
+
+
+
 
 .navbar-brand,
 .nav-link {
@@ -34,7 +38,7 @@ body {
 
 /* Post styles */
 .post {
-  background-color: #ffffff;
+  background-color: #cceef7;
   margin-bottom: 1rem;
   padding: 1rem;
   border: 1px solid #ddd;
@@ -51,13 +55,13 @@ body {
 }
 
 .post-meta {
-  color: #6c757d;
+  color: #2c435a;
   font-size: 0.875rem;
   margin-bottom: 1rem;
 }
 
 .btn-read-more {
-  background-color: #0056b3;
+  background-color: #2c435a;
   color: white;
   padding: 0.375rem 0.75rem;
   border: none;
@@ -67,7 +71,7 @@ body {
 }
 
 .btn-read-more:hover {
-  background-color: #004494;
+  background-color: #09e0c7;
 }
 
 /* Reset list styles */
@@ -94,3 +98,41 @@ body {
 .nav-link:hover {
   background-color: #495057; /* Slight background on hover for interactivity */
 }
+
+/* Footer styles */
+.footer {
+  background-color: #2c435a;
+  color: #ffffff;
+  padding: 1rem 0;
+  margin-top: 2rem; /* Add some space between the content and the footer */
+  text-align: center;
+}
+
+.footer .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer p {
+  margin: 0.5rem 0;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.social-links a {
+  color: #ffffff;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 1.5rem; /* Size of the icons */
+}
+
+.social-links a:hover {
+  color: #05edd2; /* Lighten the icon color on hover */
+}
+
+

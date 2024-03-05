@@ -12,9 +12,10 @@ router.post('/', isAuthenticated, async (req, res) => {
       content: req.body.content,
       userId: req.session.userId 
     });
-    res.status(201).json(post);
-  } catch (error) {
-    res.status(400).json({ message: "Error creating post", error: error.message });
+    res.redirect('/');
+  } catch (err) {
+      console.log(err);
+      res.status(400).json(err);
   }
 });
 
@@ -61,18 +62,24 @@ router.put('/:id', isAuthenticated, async (req, res) => {
 });
 
 // Delete a post
-router.delete('/:id', isAuthenticated, async (req, res) => {
+router.delete('/posts/:id', async (req, res) => {
   try {
-    const deleted = await Post.destroy({
-      where: { id: req.params.id, userId: req.session.userId }
-    });
-    if (deleted) {
-      res.send('Post deleted successfully');
-    } else {
-      res.status(404).send('Post not found or user not authorized');
-    }
-  } catch (error) {
-    res.status(500).json({ message: "Error deleting post", error: error.message });
+      const postData = await Post.destroy({
+          where: {
+              id: req.params.id,
+              user_id: req.session.user_id,
+          },
+      });
+
+      if (!postData) {
+          res.status(404).json({ message: 'No post found with this id!' });
+          return;
+      }
+
+      res.status(200).json(postData);
+  } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
   }
 });
 

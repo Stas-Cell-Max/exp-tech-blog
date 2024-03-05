@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const sequelize = require('./config/connection'); // Import Sequelize connection
 const apiRoutes = require('./controllers/');
+const userPageRoutes = require('./controllers/api/usersPageRoutes');
 const homeRoutes = require('./controllers/homeRoutes'); // Adjust the path as needed
 const customHelpers = require('./helpers/handlebars-helpers'); 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -20,9 +21,7 @@ const hbs = exphbs.create({
   layoutsDir: path.join(__dirname, 'views/layouts'),
   partialsDir: path.join(__dirname, 'views/partials'),
   helpers: customHelpers,
- 
 });
-
 
 // Middleware setup
 app.use(express.json());
@@ -51,6 +50,7 @@ app.set('view engine', 'handlebars');
 
 app.use('/api', apiRoutes);
 app.use('/', homeRoutes);
+app.use('/users', userPageRoutes); 
 
 // Sequelize model synchronization
 sequelize.sync({ force: false }).then(() => {

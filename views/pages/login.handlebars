@@ -1,4 +1,9 @@
 <h2>Login</h2>
+
+{{#if error}}
+    <div style="color: red;">{{error}}</div>
+{{/if}}
+
 <form action="/api/users/login" method="POST">
     <div>
         <label for="email">Email:</label>

@@ -69,3 +69,28 @@ body {
 .btn-read-more:hover {
   background-color: #004494;
 }
+
+/* Reset list styles */
+.navbar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* This will display the list items inline */
+  align-items: center;
+}
+
+.nav-item {
+  margin-right: 10px; /* Adjust the spacing between the items as needed */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #ffffff; 
+  padding: 10px 15px; /* Adjust padding to control the size of the clickable area */
+  display: block;
+  border-radius: 5px; /* Optional: rounded corners */
+}
+
+.nav-link:hover {
+  background-color: #495057; /* Slight background on hover for interactivity */
+}

@@ -1,4 +1,7 @@
 <h2>Register</h2>
+{{#if error}}
+    <div style="color: red;">{{error}}</div>
+{{/if}}
 <form action="/api/users/register" method="POST">
     <div>
         <label for="name">Name:</label>

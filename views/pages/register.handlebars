@@ -1,19 +1,18 @@
-<h2>Register</h2>
-{{#if error}}
-    <div style="color: red;">{{error}}</div>
-{{/if}}
-<form action="/api/users/register" method="POST">
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-    <button type="submit">Register</button>
-</form>
+<div class="form-container">
+  <h2>Register</h2>
+  <form action="/api/users/register" method="POST" class="form-style">
+      <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit" class="btn-form">Register</button>
+  </form>
+</div>

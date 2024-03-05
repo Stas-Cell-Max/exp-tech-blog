@@ -32,16 +32,39 @@ router.get('/', async (req, res) => {
 // Get a single post by id
 router.get('/:id', async (req, res) => {
   try {
-    const post = await Post.findByPk(req.params.id);
+    const post = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          as: 'author', 
+          attributes: ['name', 'id'], 
+        },
+        {
+          model: Comment,
+          as: 'comments', 
+          include: {
+            model: User,
+            as: 'commenter', 
+            attributes: ['name', 'id'] 
+          }
+        }
+      ]
+    });
     if (post) {
-      res.json(post);
+      
+      res.render('post', {
+        post: post.get({ plain: true }), // Converts the post to a plain object
+        loggedIn: req.session.userId != null // Pass the loggedIn status to the template
+      });
     } else {
       res.status(404).send('Post not found');
     }
   } catch (error) {
-    res.status(500).json({ message: "Error fetching post", error: error.message });
+    console.error('Error fetching post:', error);
+    res.status(500).send('Error loading the post');
   }
 });
+
 
 // Update a post
 router.put('/:id', isAuthenticated, async (req, res) => {

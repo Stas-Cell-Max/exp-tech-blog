@@ -72,5 +72,7 @@ Developing the Employee Tracker application was made possible with the help of v
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
+
+
 <img width="953" alt="11111" src="https://github.com/Stas-Cell-Max/exp-tech-blog/assets/137020431/1d891fbb-10c8-4958-a45c-859190340fe1">
 

@@ -51,8 +51,7 @@ This CMS-style blog site is a full-stack application that allows developers to p
 
 
 ## Deployment
-This application is deployed on Heroku. You can follow Heroku's documentation for deploying a Node.js app, ensuring you set up your environment variables in Heroku as per your .env file.
-
+This application is deployed on Heroku: https://git.heroku.com/exp-tech-blog.git
 ## Author
 - Developed by Stanislav Morozan, a passionate developer committed to creating efficient and user-friendly software solutions.
 

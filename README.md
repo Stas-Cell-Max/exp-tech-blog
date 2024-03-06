@@ -35,7 +35,7 @@ This CMS-style blog site is a full-stack application that allows developers to p
 - express-session and bcrypt for authentication
 
 ## Setup and Installation
-1. Clone the repo: `git clone git@github.com:Stas-Cell-Max/tech-blog.git`
+1. Clone the repo: `git clone git@github.com:Stas-Cell-Max/exp-tech-blog.git`
 2. Navigate to the project directory: `cd your-repo-name`
 3. Install dependencies: `npm install`
 4. Create a `.env` file and add your MySQL user, password, and database name.
@@ -58,7 +58,7 @@ This application is deployed on Heroku: https://git.heroku.com/exp-tech-blog.git
 ## Contacts
 - Email: stasma.sm17@gmail.com 
 - LinkedIn: https://www.linkedin.com/in/stanislavmorozan/
-- GitHub: git@github.com:Stas-Cell-Max/tech-blog.git
+- GitHub: git@github.com:Stas-Cell-Max/exp-tech-blog.git
 
 ## Credits
 Developing the Employee Tracker application was made possible with the help of various resources and communities. Gratefully for the knowledge shared by the following:
@@ -72,4 +72,5 @@ Developing the Employee Tracker application was made possible with the help of v
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
+<img width="953" alt="11111" src="https://github.com/Stas-Cell-Max/exp-tech-blog/assets/137020431/1d891fbb-10c8-4958-a45c-859190340fe1">
 
